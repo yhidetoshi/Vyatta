@@ -1,26 +1,6 @@
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vagrant/vyatta-icon.png)
 
-  ##### Vyattaコマンド
-  
-  
-- **タイムゾーンの変更** 
-```
-$ show configuration
-$ configure
-# set system time-zone Asia/Tokyo
-# show system time-zone
-time-zone Asia/Tokyo
-[edit]
-```
-(結果確認)
-```  
-$show configuration
-
-   time-zone Asia/Tokyo
-```
-
-
-#### Vyattaコマンドメモ　
+  #### Vyattaコマンドメモ　
 ====
 |コマンド    |説明         |
 |:-----------|:------------|
@@ -62,4 +42,22 @@ PING 172.16.100.101 (172.16.100.101) 56(84) bytes of data.
 64 bytes from 172.16.100.101: icmp_req=1 ttl=64 time=0.451 ms
 
 -> 疎通確認OK
+//vyatta4にも同様に設定をして vyatta1===> vyatta4の疎通確認
+$ traceroute 192.168.200.222
+traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
+ 1  192.168.100.101 (192.168.100.101)  0.433 ms  0.383 ms  0.297 ms
+ 2  172.16.100.102 (172.16.100.102)  1.751 ms  1.627 ms  1.497 ms
+ 3  192.168.200.222 (192.168.200.222)  3.779 ms  3.714 ms  3.644 ms
+```
+
+
+- **その他設定メモ** 
+ タイムゾーンの変更
+```
+$ show configuration
+$ configure
+# set system time-zone Asia/Tokyo
+# show system time-zone
+time-zone Asia/Tokyo
+[edit]
 ```
