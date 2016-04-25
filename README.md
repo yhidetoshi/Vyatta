@@ -24,7 +24,7 @@ Vyattaコマンドメモ　
 
 vyatta1からvyatta2(右側)のethに通信できるようにスタティックルートを設定
 ```
-//vyatta1でeth0によって通信してしまうのでinterfaceを無効化
+//4台ともeth0によって通信してしまうのでinterfaceを無効化
 vagrant@vyatta-client1# set interfaces ethernet eth0 disable
 
 
