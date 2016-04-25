@@ -1,5 +1,9 @@
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vagrant/vyatta-icon.png)
 
+(※)VagrantでVyattaを作る場合は参考にこちら
+
+-> https://github.com/yhidetoshi/Vagrant
+
 Vyattaコマンドメモ　
 ====
 |コマンド    |説明         |
