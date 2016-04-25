@@ -1,6 +1,6 @@
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vagrant/vyatta-icon.png)
 
-  #### Vyattaコマンドメモ　
+Vyattaコマンドメモ　
 ====
 |コマンド    |説明         |
 |:-----------|:------------|
