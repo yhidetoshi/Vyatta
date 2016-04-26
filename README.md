@@ -93,6 +93,30 @@ set protocols ospf redistribute connected
 # commit
 # save
 ```
+**(OSPF確認)**
+```
+[vyatta1]
+$ show ip ospf neighbor
+
+    Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
+127.0.0.2         1 Full/Backup       30.289s 10.0.2.2        eth2:10.0.2.11           0     0     0
+127.0.0.3         1 Full/Backup       38.712s 10.0.0.2        eth3:10.0.0.11           0     0     0
+
+[vyatta2]
+$ show ip ospf neighbor
+
+    Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
+127.0.0.1         1 Full/DR           32.462s 10.0.2.11       eth1:10.0.2.2            0     0     0
+127.0.0.3         1 Full/Backup       39.589s 10.0.1.2        eth2:10.0.1.3            0     0     0
+
+[vyatta3]
+$ show ip ospf neighbor
+
+    Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
+127.0.0.1         1 Full/DR           35.924s 10.0.0.11       eth1:10.0.0.2            0     0     0
+127.0.0.2         1 Full/DR           34.679s 10.0.1.3        eth2:10.0.1.2            0     0     0
+=========
+```
 
 
 - **その他設定メモ** 
