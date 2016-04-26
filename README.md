@@ -1,4 +1,4 @@
-![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vagrant/vyatta-icon.png)
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-icon.png)
 
 (※)VagrantでVyattaを作る場合は参考にこちら:-> https://github.com/yhidetoshi/Vagrant
 
@@ -52,6 +52,10 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
  2  172.16.100.102 (172.16.100.102)  1.751 ms  1.627 ms  1.497 ms
  3  192.168.200.222 (192.168.200.222)  3.779 ms  3.714 ms  3.644 ms
 ```
+
+
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/switch3.png)
+
 
 
 - **その他設定メモ** 
