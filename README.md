@@ -58,7 +58,7 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
 #### **[OSPF]**
 図をお借りしてswitchとポートは表でマッピング.
 
-![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/switch3.png)
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-v1.png)
 
 
 |vyatta        |eth1(F0/1)|LAN|eth2(F0/2)|LAN|
@@ -120,6 +120,7 @@ $ show ip ospf neighbor
 =========
 ```
 - **さらに1台のvyatttaを追加(vyatta1にeth0を付加してvyatta99を接続)**
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-v2.png)
 ```
 [vyatta99]
 # set protocols ospf parameters router-id 127.0.0.5
