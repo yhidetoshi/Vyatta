@@ -119,7 +119,7 @@ $ show ip ospf neighbor
 127.0.0.2         1 Full/DR           34.679s 10.0.1.3        eth2:10.0.1.2            0     0     0
 =========
 ```
-- さらに1台のvyatttaを追加(vyatta1にeth0を付加してvyatta99を接続)
+- **さらに1台のvyatttaを追加(vyatta1にeth0を付加してvyatta99を接続)**
 ```
 [vyatta99]
 # set protocols ospf parameters router-id 127.0.0.5
@@ -140,7 +140,7 @@ PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 64 bytes from 10.0.0.2: icmp_req=1 ttl=63 time=0.825 ms
 ```
 
-(vyatta1のeth2のコストを50、それ以外は全て10)にしてルートが変わるか確認
+**(vyatta1のeth2のコストを50、それ以外は全て10)にしてルートが変わるか確認**
 [コストのつけ方]
 ```
 # set interfaces ethernet eth3 ip ospf cost 50
