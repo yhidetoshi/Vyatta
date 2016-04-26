@@ -53,9 +53,46 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
  3  192.168.200.222 (192.168.200.222)  3.779 ms  3.714 ms  3.644 ms
 ```
 
+#### **[OSPF]**
+図をお借りしてswitchとポートは表でマッピング.
 
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/switch3.png)
 
+
+|vyatta        |eth1(F0/1)(/24)|LAN|eth2(F0/2)(/24)|LAN|
+|:-------------|:-----------|:-----------|:-----------|:-----------|
+|vyatta1(SW-A) |10.0.2.11   | 10.0.2.0/24| 10.0.0.1   |10.0.0.0/24 |
+|vyatta2(SW-B) |10.0.2.2    | 10.0.2.0/24| 10.0.1.3   |10.0.1.0/24 |
+|vyatta3(SW-C) |10.0.1.2    | 10.0.1.0/24| 10.0.0.2   |10.0.1.0/24 |
+
+```
+[vyatta1]
+# configure
+# set protocols ospf parameters router-id 127.0.0.1
+# set protocols ospf area 0.0.0.0 network 10.0.2.0/24
+# set protocols ospf area 0.0.0.0 network 10.0.0.0/24
+set protocols ospf redistribute connected
+# commit
+# save
+
+[vyatta1]
+# configure
+# set protocols ospf parameters router-id 127.0.0.2
+# set protocols ospf area 0.0.0.0 network 10.0.2.0/24
+# set protocols ospf area 0.0.0.0 network 10.0.1.0/24
+set protocols ospf redistribute connected
+# commit
+# save
+
+[vyatta2]
+# configure
+# set protocols ospf parameters router-id 127.0.0.3
+# set protocols ospf area 0.0.0.0 network 10.0.0.0/24
+# set protocols ospf area 0.0.0.0 network 10.0.1.0/24
+# set protocols ospf redistribute connected
+# commit
+# save
+```
 
 
 - **その他設定メモ** 
