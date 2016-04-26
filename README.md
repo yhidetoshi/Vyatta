@@ -2,7 +2,7 @@
 
 (※)VagrantでVyattaを作る場合は参考にこちら:-> https://github.com/yhidetoshi/Vagrant
 
-※(以下、検証のため、間違いがあるかもしれないです..)
+※(以下、勉強中/検証のため、間違いがあるかもしれないです..)
 
 Vyattaコマンドメモ　
 =======
