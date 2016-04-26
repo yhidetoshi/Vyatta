@@ -119,13 +119,20 @@ $ show ip ospf neighbor
 127.0.0.2         1 Full/DR           34.679s 10.0.1.3        eth2:10.0.1.2            0     0     0
 =========
 ```
-- さらに1台のvyatttaを追加
+- さらに1台のvyatttaを追加(vyatta1にeth0を付加してvyatta99を接続)
 ```
 [vyatta99]
 # set protocols ospf parameters router-id 127.0.0.5
 # set protocols ospf area 0.0.0.0 network 192.168.1.0/24
 # set protocols ospf redistribute connected
 ```
+|vyatta        |eth0        |LAN         |eth1(F0/1)  |LAN         |eth2(F0/2)  | LAN        |
+|:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+|vyatta99      |  null      |  null      |192.168.1.2 |192.168.1.0/24|  null    |   null
+|vyatta1(SW-A) |192.168.1.2 |192.168.1.0/24|10.0.2.11   | 10.0.2.0/24| 10.0.0.1   |10.0.0.0/24 |
+|vyatta2(SW-B) |  null      |  null      |10.0.1.3    | 10.0.1.0/24| 10.0.2.2   |10.0.2.0/24 |
+|vyatta3(SW-C) |  null      |  null      |10.0.0.2    | 10.0.0.0/24| 10.0.1.2   |10.0.1.0/24 |
+
 (結果) vyatta99からvyatta3に疎通できるようになった。
 ```
 $ ping 10.0.0.2
@@ -133,9 +140,30 @@ PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 64 bytes from 10.0.0.2: icmp_req=1 ttl=63 time=0.825 ms
 ```
 
-ToDo:
- - 経路に重みつけをしてルートを変更してみる]
- - ルーティング周りの知識補充
+(vyatta1のeth2のコストを50、それ以外は全て10)にしてルートが変わるか確認
+[コストのつけ方]
+```
+# set interfaces ethernet eth3 ip ospf cost 50
+```
+```
+(コスト変更前)
+$ traceroute 10.0.1.2
+traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
+ 1  192.168.1.11 (192.168.1.11)  1.570 ms  1.347 ms  1.267 ms
+ 2  10.0.1.2 (10.0.1.2)  2.844 ms  2.765 ms  2.454 ms
+
+(経路)#=> vyatta99 -> vyatta3
+
+(コスト変更後)
+$ traceroute 10.0.1.2
+traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
+ 1  192.168.1.11 (192.168.1.11)  0.411 ms  0.284 ms  0.178 ms
+ 2  10.0.2.2 (10.0.2.2)  1.585 ms  1.533 ms  1.468 ms
+ 3  10.0.1.2 (10.0.1.2)  2.341 ms  2.281 ms  2.209 ms
+
+(経路)#=> vyatta99 -> vyatta2 -> vyatta3
+```
+
 
 - **その他設定メモ** 
  タイムゾーンの変更
