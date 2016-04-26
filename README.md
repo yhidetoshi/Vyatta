@@ -165,6 +165,10 @@ traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
 ```
 ※4台のVyattaのconfig:https://github.com/yhidetoshi/Vyatta/tree/master/OSPF-conf
 
+### VLAN
+#### タグVLAN
+
+
 - **その他設定メモ** 
  タイムゾーンの変更
 ```
