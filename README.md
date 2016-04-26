@@ -117,6 +117,20 @@ $ show ip ospf neighbor
 127.0.0.2         1 Full/DR           34.679s 10.0.1.3        eth2:10.0.1.2            0     0     0
 =========
 ```
+- さらに1台のvyatttaを追加
+```
+[vyatta99]
+# set protocols ospf parameters router-id 127.0.0.5
+# set protocols ospf area 0.0.0.0 network 192.168.1.0/24
+# set protocols ospf redistribute connected
+```
+(結果) vyatta99からvyatta3に疎通できるようになった。
+```
+$ ping 10.0.0.2
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_req=1 ttl=63 time=0.825 ms
+```
+
 
 
 - **その他設定メモ** 
