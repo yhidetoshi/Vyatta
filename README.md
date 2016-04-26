@@ -120,7 +120,9 @@ $ show ip ospf neighbor
 =========
 ```
 - **さらに1台のvyatttaを追加(vyatta1にeth0を付加してvyatta99を接続)**
-![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-v2.png)
+
+
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-add.png)
 ```
 [vyatta99]
 # set protocols ospf parameters router-id 127.0.0.5
