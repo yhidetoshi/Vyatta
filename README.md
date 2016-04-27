@@ -14,6 +14,7 @@ Vyattaコマンドメモ　
 |# save|設定保存|
 |$ reboot|再起動|
 |$ show version|バージョン確認|
+|# set interfaces ethernet eth1 address 10.0.2.2/24|eth1に10.0.2.2/24のアドレスを付与する例|
 |$ show interfaces|インターフェース確認|
 |# set interfaces ethernet eth0 disable|インターフェースを無効化|
 |# delete interfaces ethernet eth0 disable|インターフェースを有効化|
