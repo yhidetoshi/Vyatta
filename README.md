@@ -188,7 +188,6 @@ ethernet eth2 {
             address 10.0.2.101/24
         }
     }
-
 ```
 
 [vyatta3]
