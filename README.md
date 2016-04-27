@@ -68,7 +68,7 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
 |vyatta4       |10.0.0.2    | 10.0.0.0/24| 10.0.1.2   |10.0.1.0/24 |            |            |
 
 ```
-[vyatta1]
+[vyatta2]
 # configure
 # set protocols ospf parameters router-id 127.0.0.1
 # set protocols ospf area 0.0.0.0 network 10.0.2.0/24
@@ -77,7 +77,7 @@ set protocols ospf redistribute connected
 # commit
 # save
 
-[vyatta2]
+[vyatta3]
 # configure
 # set protocols ospf parameters router-id 127.0.0.2
 # set protocols ospf area 0.0.0.0 network 10.0.2.0/24
@@ -86,7 +86,7 @@ set protocols ospf redistribute connected
 # commit
 # save
 
-[vyatta3]
+[vyatta4]
 # configure
 # set protocols ospf parameters router-id 127.0.0.3
 # set protocols ospf area 0.0.0.0 network 10.0.0.0/24
@@ -97,21 +97,21 @@ set protocols ospf redistribute connected
 ```
 **(OSPF確認)**
 ```
-[vyatta1]
+[vyatta2]
 $ show ip ospf neighbor
 
     Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
 127.0.0.2         1 Full/Backup       30.289s 10.0.2.2        eth2:10.0.2.11           0     0     0
 127.0.0.3         1 Full/Backup       38.712s 10.0.0.2        eth3:10.0.0.11           0     0     0
 
-[vyatta2]
+[vyatta3]
 $ show ip ospf neighbor
 
     Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
 127.0.0.1         1 Full/DR           32.462s 10.0.2.11       eth1:10.0.2.2            0     0     0
 127.0.0.3         1 Full/Backup       39.589s 10.0.1.2        eth2:10.0.1.3            0     0     0
 
-[vyatta3]
+[vyatta4]
 $ show ip ospf neighbor
 
     Neighbor ID Pri State           Dead Time Address         Interface            RXmtL RqstL DBsmL
@@ -119,12 +119,12 @@ $ show ip ospf neighbor
 127.0.0.2         1 Full/DR           34.679s 10.0.1.3        eth2:10.0.1.2            0     0     0
 =========
 ```
-- **さらに1台のvyatttaを追加(vyatta1にeth0を付加してvyatta99を接続)**
+- **さらに1台の[vyattta1]を追加**
 
 
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-add.png)
 ```
-[vyatta99]
+[vyatta1]
 # set protocols ospf parameters router-id 127.0.0.5
 # set protocols ospf area 0.0.0.0 network 192.168.1.0/24
 # set protocols ospf redistribute connected
@@ -136,14 +136,14 @@ $ show ip ospf neighbor
 |vyatta3       |10.0.2.2    | 10.0.2.0/24| 10.0.1.3   |10.0.1.0/24 |            |            |
 |vyatta4       |10.0.0.2    | 10.0.0.0/24| 10.0.1.2   |10.0.1.0/24 |            |            |
 
-(結果) vyatta99からvyatta3に疎通できるようになった。
+(結果) vyatta1からvyatta4に疎通できるようになった。
 ```
 $ ping 10.0.0.2
 PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 64 bytes from 10.0.0.2: icmp_req=1 ttl=63 time=0.825 ms
 ```
 
-**(vyatta1のeth2のコストを50、それ以外は全て10)にしてルートが変わるか確認**
+**(vyatta2のeth3のコストを50、それ以外は全て10)にしてルートが変わるか確認**
 [コストのつけ方]
 ```
 # set interfaces ethernet eth3 ip ospf cost 50
@@ -155,7 +155,7 @@ traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
  1  192.168.1.11 (192.168.1.11)  1.570 ms  1.347 ms  1.267 ms
  2  10.0.1.2 (10.0.1.2)  2.844 ms  2.765 ms  2.454 ms
 
-(経路)#=> vyatta99 -> vyatta3
+(経路)#=> vyatta2 -> vyatta4
 
 (コスト変更後)
 $ traceroute 10.0.1.2
@@ -164,7 +164,7 @@ traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
  2  10.0.2.2 (10.0.2.2)  1.585 ms  1.533 ms  1.468 ms
  3  10.0.1.2 (10.0.1.2)  2.341 ms  2.281 ms  2.209 ms
 
-(経路)#=> vyatta99 -> vyatta2 -> vyatta3
+(経路)#=> vyatta2 -> vyatta3 -> vyatta4
 ```
 ※4台のVyattaのconfig:https://github.com/yhidetoshi/Vyatta/tree/master/OSPF-conf
 
