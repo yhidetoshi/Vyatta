@@ -207,8 +207,6 @@ ethernet eth1 {
 - **[VLANで通信がきているか確認]**
 ```
 # sudo tcpdump -ne -i eth1
-
-02:34:57.149754 08:00:27:4e:07:33 > 01:00:5e:00:00:05, ethertype 802.1Q (0x8100), length 86: vlan 100, p 0, ethertype IPv4, 10.0.2.101 > 224.0.0.5: OSPFv2, Hello, length 48
 ```
 
 
