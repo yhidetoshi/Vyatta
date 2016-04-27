@@ -5,6 +5,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vyatta_client1.vm.box = "higebu/vyos-1.1.7-amd64"
     vyatta_client1.vm.hostname = "vyatta-client1"
     vyatta_client1.vm.network "private_network", ip: "192.168.1.2"
+    vyatta_client1.vm.network "private_network", ip: "192.168.1.5"
 
 #    vyatta_client1.vm.provider "virtualbox" do |v1|
 #	v1.cpus = 1
