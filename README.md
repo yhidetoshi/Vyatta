@@ -173,6 +173,45 @@ traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
 ### VLAN
 #### タグVLAN
 
+- **[vyatta2]<===>[vyatta3]**
+-> タグVLAN(id=100)で通信させる.以下のように設定
+
+[vyatta2]
+```
+#=>設定コマンド
+# set interfaces ethernet eth2 vif 100
+# set interfaces ethernet eth2 vif 100 address 10.0.2.101/24
+
+#=>eth3のコンフィグ
+ethernet eth2 {
+        vif 100 {
+            address 10.0.2.101/24
+        }
+    }
+
+```
+
+[vyatta3]
+```
+#=>設定コマンド
+set interfaces ethernet eth1 vif 100
+set interfaces ethernet eth1 vif 100 address 10.0.2.102/24
+
+#=>eth1のコンフィグ
+ethernet eth1 {
+        vif 100 {
+            address 10.0.2.102/24
+        }
+    }
+```
+
+- **[VLANで通信がきているか確認]**
+```
+# sudo tcpdump -ne -i eth1
+
+02:34:57.149754 08:00:27:4e:07:33 > 01:00:5e:00:00:05, ethertype 802.1Q (0x8100), length 86: vlan 100, p 0, ethertype IPv4, 10.0.2.101 > 224.0.0.5: OSPFv2, Hello, length 48
+```
+
 
 - **その他設定メモ** 
  タイムゾーンの変更
