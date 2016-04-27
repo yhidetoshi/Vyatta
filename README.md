@@ -174,9 +174,12 @@ traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
 #### タグVLAN
 
 - **[vyatta2]<===>[vyatta4]**
--> タグVLAN(id=100)で通信させる.以下のように設定
 
+(設定)
+```
+-> タグVLAN(id=100)で通信させる.以下のように設定
 ->タグVLAN(id=50)で通信させる.(id=100と同様にvyatta3とvyatta4を設定)
+```
 
 [vyatta2]
 ```
