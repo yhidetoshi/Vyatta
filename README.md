@@ -16,6 +16,7 @@ Vyattaコマンドメモ　
 |$ show version|バージョン確認|
 |$ show interfaces|インターフェース確認|
 |# set interfaces ethernet eth0 disable|インターフェースを無効化|
+|# delete interfaces ethernet eth0 disable|インターフェースを有効化|
 |# set system gateway-address ip_address|デフォルトゲートウェイを設定|
 |$ show ip route|ルーティングを確認|
 
