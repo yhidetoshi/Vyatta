@@ -75,7 +75,7 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
 # set protocols ospf parameters router-id 127.0.0.1
 # set protocols ospf area 0.0.0.0 network 10.0.2.0/24
 # set protocols ospf area 0.0.0.0 network 10.0.0.0/24
-set protocols ospf redistribute connected
+# set protocols ospf redistribute connected
 # commit
 # save
 
@@ -84,7 +84,7 @@ set protocols ospf redistribute connected
 # set protocols ospf parameters router-id 127.0.0.2
 # set protocols ospf area 0.0.0.0 network 10.0.2.0/24
 # set protocols ospf area 0.0.0.0 network 10.0.1.0/24
-set protocols ospf redistribute connected
+# set protocols ospf redistribute connected
 # commit
 # save
 
