@@ -241,6 +241,10 @@ ethernet eth1 {
  set interfaces ethernet eth1 vrrp vrrp-group 2 virtual-address 10.0.2.10
  set interfaces ethernet eth1 vrrp vrrp-group 2 priority 100
 ```
+- **[vyatta1の設定]**
+
+-> vyatta1のデフォルトゲートウェイを仮想IP(10.0.2.10)に設定
+
 
 **参考:(configの抜粋)**
 ```
