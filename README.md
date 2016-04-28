@@ -20,6 +20,7 @@ Vyattaコマンドメモ　
 |# delete interfaces ethernet eth0 disable|インターフェースを有効化|
 |# set system gateway-address ip_address|デフォルトゲートウェイを設定|
 |$ show ip route|ルーティングを確認|
+|$ show vrrp|vrrpの状態確認|
 
 #### **[スタティックルート]**
 -> Vagrantで4台のVyattaを構築
