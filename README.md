@@ -233,13 +233,16 @@ ethernet eth1 {
 
 **[VRRPの設定]**
 ```
-[vyatta2]
-# set interfaces ethernet eth3  vrrp vrrp-group 2 virtual-address 10.0.2.10
-# set interfaces ethernet eth3 vrrp vrrp-group 2 priority 255
-
 [vyatta3]
- set interfaces ethernet eth1 vrrp vrrp-group 2 virtual-address 10.0.2.10
- set interfaces ethernet eth1 vrrp vrrp-group 2 priority 100
+# set interfaces ethernet eth2 vrrp vrrp-group 10 virtual-address 10.0.2.10
+# set interfaces ethernet eth2 vrrp vrrp-group 10 advertise-interval 1
+# set interfaces ethernet eth2 vrrp vrrp-group 10 priority 255
+
+[vyatta2]
+# set interfaces ethernet eth3 vrrp vrrp-group 10 virtual-address 10.0.2.10
+# set interfaces ethernet eth3 vrrp vrrp-group 10 advertise-interval 1
+# set interfaces ethernet eth3 vrrp vrrp-group 10 priority 100
+
 ```
 - **[vyatta1の設定]**
 
@@ -248,15 +251,36 @@ ethernet eth1 {
 
 **参考:(configの抜粋)**
 ```
- ethernet eth1 {
-        address 10.0.1.9/24
+ethernet eth2 {
+        address 10.0.2.9/24
         vrrp {
-            vrrp-group 2 {
-                priority 100
+            vrrp-group 10 {
+                advertise-interval 1
+                priority 255
                 virtual-address 10.0.2.10
             }
         }
     }
+```
+**(vrrpの状態確認)**
+```
+[vyatta3]
+$ sh vrrp
+                                 RFC        Addr   Last        Sync
+Interface         Group  State   Compliant  Owner  Transition  Group
+---------         -----  -----   ---------  -----  ----------  -----
+eth2              10     MASTER  no         yes    1m50s       <none>
+
+
+[vyatta2]
+$ sh vrrp
+                                 RFC        Addr   Last        Sync
+Interface         Group  State   Compliant  Owner  Transition  Group
+---------         -----  -----   ---------  -----  ----------  -----
+eth3              10     BACKUP  no         no     49s         <none>
+
+
+#=> priorityが高いvyatta3がMasterで低いvyatta2がBACKUPになっている
 ```
 
 
@@ -264,10 +288,10 @@ ethernet eth1 {
 ```
 $ traceroute 10.0.1.8
 traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
- 1  10.0.2.11 (10.0.2.11)  0.390 ms  0.357 ms  0.281 ms
- 2  10.0.1.8 (10.0.1.8)  0.968 ms  0.853 ms  1.230 ms
+ 1  10.0.2.9 (10.0.2.9)  0.307 ms  0.245 ms  0.265 ms
+ 2  10.0.1.8 (10.0.1.8)  0.734 ms  0.989 ms  0.551 ms
 
-#=> priorityの高いvyatta2を経由してvyatta4に到達しているのを確認
+#=> priorityの高いvyatta3を経由してvyatta4に到達しているのを確認
 ```
 
 
