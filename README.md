@@ -216,6 +216,31 @@ ethernet eth1 {
 07:12:21.194095 08:00:27:e9:fa:92 > 08:00:27:1b:a8:34, ethertype 802.1Q (0x8100), length 102: vlan 50, p 0, ethertype IPv4, 10.0.1.2 > 10.0.2.101: ICMP echo reply, id 25329, seq 5, length 64
 ```
 
+[VRRP+OSPF]
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-vrrp.png)
+
+|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+|vyatta1       |192.168.1.2 |192.168.1.0/24|          |            |            |            |
+|vyatta2       |            |            |10.0.1.11   | 10.0.1.0/24| 10.0.2.11  |10.0.2.0/24 |
+|vyatta3       |10.0.1.9    | 10.0.1.0/24| 10.0.2.9   |10.0.2.0/24 |            |            |
+|vyatta4       |            |            | 10.0.1.8   |10.0.1.0/24 |            |            |
+
+- **[通信の流れ]**
+-> vyatta1からvyatta4にvip('10.0.2.10')を利用してルーティング(OSPF)
+-> VRRPの優先度を変えてルーティングが変わるか確認
+
+**[VRRPの設定]**
+```
+[vyatta2]
+# set interfaces ethernet eth3  vrrp vrrp-group 2 virtual-address 10.0.2.10
+# set interfaces ethernet eth3 vrrp vrrp-group 2 priority 255
+
+[vyatta3]
+ set interfaces ethernet eth1 vrrp vrrp-group 2 virtual-address 10.0.2.10
+ set interfaces ethernet eth1 vrrp vrrp-group 2 priority 100
+```
+
 
 - **その他設定メモ** 
  タイムゾーンの変更
