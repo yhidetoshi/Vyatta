@@ -241,6 +241,31 @@ ethernet eth1 {
  set interfaces ethernet eth1 vrrp vrrp-group 2 priority 100
 ```
 
+**参考:(configの抜粋)**
+```
+ ethernet eth1 {
+        address 10.0.1.9/24
+        vrrp {
+            vrrp-group 2 {
+                priority 100
+                virtual-address 10.0.2.10
+            }
+        }
+    }
+```
+
+
+**(経路確認)**
+```
+$ traceroute 10.0.1.8
+traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
+ 1  10.0.2.11 (10.0.2.11)  0.390 ms  0.357 ms  0.281 ms
+ 2  10.0.1.8 (10.0.1.8)  0.968 ms  0.853 ms  1.230 ms
+
+#=> priorityの高いvyatta2を経由してvyatta4に到達しているのを確認
+```
+
+
 
 - **その他設定メモ** 
  タイムゾーンの変更
