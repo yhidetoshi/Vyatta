@@ -323,6 +323,34 @@ traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
 #=> priorityの高いvyatta2を経由してvyatta4に到達しているのを確認
 ```
 
+**(Masterのvyatta2を落としたらvyatta3経由で到達するか確認)**
+```
+[vyatta2]
+$ sh vrrp
+                                 RFC        Addr   Last        Sync
+Interface         Group  State   Compliant  Owner  Transition  Group
+---------         -----  -----   ---------  -----  ----------  -----
+eth3              10     FAULT   no         no     11s         <none>
+
+
+$ sh vrrp
+                                 RFC        Addr   Last        Sync
+Interface         Group  State   Compliant  Owner  Transition  Group
+---------         -----  -----   ---------  -----  ----------  -----
+eth2              10     MASTER  no         no     1m57s       <none>
+
+#=>Backupだったvyatta3が昇格してMasterへ
+
+
+$ traceroute 10.0.1.8
+traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
+ 1  10.0.2.9 (10.0.2.9)  0.441 ms  0.295 ms  0.223 ms
+ 2  10.0.1.8 (10.0.1.8)  1.162 ms  1.095 ms  0.967 ms
+
+#=>vyatta3を経由してvyatta4に到達しているのを確認
+```
+-> **冗長機能が効いている事を確認できた。**
+
 
 - **その他設定メモ** 
  タイムゾーンの変更
