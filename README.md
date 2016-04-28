@@ -294,6 +294,34 @@ traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
 #=> priorityの高いvyatta3を経由してvyatta4に到達しているのを確認
 ```
 
+**(priorityを変更してvrrpの状態確認)**
+
+-> vyatta2の優先度を250, vyatta3の優先度を100に設定
+```
+[vyatta2]
+$ sh vrrp
+                                 RFC        Addr   Last        Sync
+Interface         Group  State   Compliant  Owner  Transition  Group
+---------         -----  -----   ---------  -----  ----------  -----
+eth3              10     MASTER  no         no     11s         <none>
+
+
+[vyatta3]
+$ sh vrrp
+                                 RFC        Addr   Last        Sync
+Interface         Group  State   Compliant  Owner  Transition  Group
+---------         -----  -----   ---------  -----  ----------  -----
+eth2              10     BACKUP  no         no     34s         <none>
+```
+**(経路確認)**
+```
+$ traceroute 10.0.1.8
+traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
+ 1  10.0.2.11 (10.0.2.11)  0.470 ms  0.285 ms  1.506 ms
+ 2  10.0.1.8 (10.0.1.8)  1.813 ms  1.655 ms  1.611 ms
+
+#=> priorityの高いvyatta2を経由してvyatta4に到達しているのを確認
+```
 
 
 - **その他設定メモ** 
