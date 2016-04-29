@@ -22,6 +22,8 @@ Vyattaコマンドメモ　
 |# set system gateway-address ip_address|デフォルトゲートウェイを設定|
 |$ show ip route|ルーティングを確認|
 |$ show vrrp|vrrpの状態確認|
+|$ show firewall|firewallの設定確認|
+|# show firewall|firewallの設定確認|
 
 #### **[スタティックルート]**
 -> Vagrantで4台のVyattaを構築
@@ -64,7 +66,7 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-v1.png)
 
 
-|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|              |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
 |:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
 |vyatta2       |192.168.1.11|192.168.1.0/24|10.0.2.11 | 10.0.2.0/24| 10.0.0.11  |10.0.0.0/24 |
 |vyatta3       |10.0.2.2    | 10.0.2.0/24| 10.0.1.3   |10.0.1.0/24 |            |            |
@@ -132,7 +134,7 @@ $ show ip ospf neighbor
 # set protocols ospf area 0.0.0.0 network 192.168.1.0/24
 # set protocols ospf redistribute connected
 ```
-|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|              |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
 |:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
 |vyatta1       |192.168.1.2 |192.168.1.0/24|          |            |            |            |
 |vyatta2       |192.168.1.11|192.168.1.0/24|10.0.2.11 | 10.0.2.0/24| 10.0.0.11  |10.0.0.0/24 |
@@ -220,7 +222,7 @@ ethernet eth1 {
 [VRRP+OSPF]
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-vrrp.png)
 
-|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|              |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
 |:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
 |vyatta1       |192.168.1.2 |192.168.1.0/24|          |            |            |            |
 |vyatta2       |            |            |10.0.1.11   | 10.0.1.0/24| 10.0.2.11  |10.0.2.0/24 |
@@ -355,7 +357,7 @@ traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-fw-icon.jpeg)
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-firewall.png)
 
-|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|              |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
 |:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
 |vyatta1       |192.168.1.2 |192.168.1.0/24|10.0.2.2  |10.0.2.2/24 |            |            |
 |vyatta2       |            |            |10.0.1.11   | 10.0.1.0/24| 10.0.2.11  |10.0.2.0/24 |
@@ -435,7 +437,7 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-fw-fig2.png)
 
 
-|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|              |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
 |:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
 |vm1           |192.168.1.2 |192.168.1.0/24|          |            |            |            |
 |vyatta2       |            |            |10.0.1.11   | 10.0.1.0/24| 10.0.2.11  |10.0.2.0/24 |
