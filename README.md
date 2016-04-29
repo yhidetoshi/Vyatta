@@ -352,6 +352,78 @@ traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
 -> **冗長機能が効いている事を確認できた。**
 
 
+
+
+
+[ステートレスファイアウォール]
+
+すべてのトラッフィクを止める
+```
+# set firewall name Outside-In default-action drop
+
+[インターフェースにfirewallを適用]
+# set interfaces ethernet eth3 firewall in name Outside-In
+
+※ -> in : stop outside to inside packets
+  -> out: stop inside to outside packets
+```
+
+[vyatta2 firewallの設定]
+```
+# show firewall
+ name Outside-In {
+     default-action drop
+ }
+```
+
+[接続テスト@vyatta2 ( OUT->IN )]
+```
+(設定前)
+vagrant@vyatta-client1:~$ ping 10.0.1.8
+PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
+64 bytes from 10.0.1.8: icmp_req=1 ttl=63 time=0.594 ms
+64 bytes from 10.0.1.8: icmp_req=2 ttl=63 time=0.612 ms
+
+(設定後)
+$ ping 10.0.1.8
+PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
+^C
+--- 10.0.1.8 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2000ms
+
+#=> pingがvyatta4へ届くなった
+```
+
+[接続テスト@vyatta2 ( IN -> OUT )]
+```
+# ping 10.0.1.8
+PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
+64 bytes from 10.0.1.8: icmp_req=1 ttl=64 time=0.373 ms
+
+#=> 設定通りinside to outsideは通過
+```
+
+**[icmpを通過させる]**
+
+-> `set firewall all-ping 'enable'`
+```
+vagrant@vyatta-client2# sh firewall
+ all-ping enable
+ name Outside-In {
+     default-action drop
+ }
+```
+(pingテスト)
+```
+$ ping 10.0.1.8
+PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
+64 bytes from 10.0.1.8: icmp_req=1 ttl=63 time=0.622 ms
+
+#=>再びvyatta1からvyatta4へping通信が可能になった.
+```
+
+
+
 - **その他設定メモ** 
  タイムゾーンの変更
 ```
