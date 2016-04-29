@@ -59,7 +59,6 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
 ```
 
 #### **[OSPF]**
-図をお借りしてswitchとポートは表でマッピング.
 
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-v1.png)
 
@@ -354,6 +353,13 @@ traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
 #### Firewall
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-fw-icon.jpeg)
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-firewall.png)
+
+|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+|vyatta1       |192.168.1.2 |192.168.1.0/24|10.0.2.2  |10.0.2.2/24 |            |            |
+|vyatta2       |            |            |10.0.1.11   | 10.0.1.0/24| 10.0.2.11  |10.0.2.0/24 |
+|vyatta3       |10.0.1.9    | 10.0.1.0/24|            |            |            |            |
+|vyatta4       |            |            | 10.0.1.8   |10.0.1.0/24 |            |            |
 
 [ステートレスファイアウォール]
 
