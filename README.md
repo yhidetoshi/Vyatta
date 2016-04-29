@@ -351,11 +351,13 @@ traceroute to 10.0.1.8 (10.0.1.8), 30 hops max, 60 byte packets
 ```
 -> **冗長機能が効いている事を確認できた。**
 
+#### Firewall
 
-
-
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-firewall.png)
 
 [ステートレスファイアウォール]
+
+vyatta2をFWとして設定してvyatta1からvyatta4へ通信させて確認する
 
 すべてのトラッフィクを止める
 ```
