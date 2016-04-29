@@ -432,7 +432,7 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 ```
 **[FWのポリシーを試すためにCentOSのVMを接続して検証]**
 
-![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-fw-version2.png)
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-fw-fig2.png)
 
 
 |vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
