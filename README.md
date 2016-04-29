@@ -416,7 +416,7 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 
 **[icmpを通過させる]**
 
--> `set firewall all-ping 'enable'`
+-> `# set firewall all-ping 'enable'`
 ```
 vagrant@vyatta-client2# sh firewall
  all-ping enable
