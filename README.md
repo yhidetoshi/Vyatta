@@ -1,5 +1,5 @@
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyos-icon.png)
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-icon.png)
-
 (※)VagrantでVyattaを作る場合は参考にこちら:-> https://github.com/yhidetoshi/Vagrant
 
 ※(以下、勉強中/検証のため、間違いがあるかもしれないです..)
