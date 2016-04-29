@@ -432,6 +432,25 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-fw-version2.png)
 
+|vyatta        |eth1        |LAN         |eth2        |LAN         |eth3        |LAN         |
+|:-------------|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+|vm1           |192.168.1.2 |192.168.1.0/24|          |            |            |            |
+|vyatta2       |            |            |10.0.1.11   | 10.0.1.0/24| 10.0.2.11  |10.0.2.0/24 |
+|vyatta3       |10.0.1.9    | 10.0.1.0/24|            |            |            |            |
+|vm4           |10.0.1.8    | 10.0.1.0/24|10.0.2.9    |10.0.2.0/24              |            |            |
+
+- vyatta2とvyatta3はOSPF
+- (メモ)[vm1とvm4のGATEWAY設定]
+```
+# cat ifcfg-eth1 | grep GATEWAY
+GATEWAY=192.168.1.11
+
+(vm4)
+# cat ifcfg-eth1 | grep GATEWAY
+GATEWAY=10.0.1.9
+```
+
+
 - **その他設定メモ** 
  タイムゾーンの変更
 ```
