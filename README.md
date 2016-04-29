@@ -430,7 +430,7 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 #=>再びvyatta1からvyatta4へping通信が可能になった.
 ```
 
-
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-fw-version2.png)
 
 - **その他設定メモ** 
  タイムゾーンの変更
