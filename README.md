@@ -481,8 +481,10 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
      }
  }
 
-・・・
+```
 
+```
+$ sh conf
  ethernet eth2 {
         address 10.0.2.9/24
         firewall {
