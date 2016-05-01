@@ -447,6 +447,8 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 
 - vyatta2とvyatta3はOSPF
 - [vyatta3(FWの設定)]
+
+-> vyatta1からvyatta4へport80番接続(httpd)とICMP通信を許可する
 ```
 # sh firewall
  name Outside-In {
@@ -467,6 +469,10 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
          state {
              new enable
          }
+     }
+      rule 25 {
+         action accept
+         protocol icmp
      }
  }
 
