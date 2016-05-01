@@ -446,15 +446,44 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 |vm4           |10.0.1.8    | 10.0.1.0/24|10.0.2.9    |10.0.2.0/24              |            |            |
 
 - vyatta2とvyatta3はOSPF
-- (メモ)[vm1とvm4のGATEWAY設定]
+- [vyatta3(FWの設定)]
 ```
-# cat ifcfg-eth1 | grep GATEWAY
-GATEWAY=192.168.1.11
+# sh firewall
+ name Outside-In {
+     default-action drop
+     rule 10 {
+         action accept
+         state {
+             established enable
+             related enable
+         }
+     }
+     rule 20 {
+         action accept
+         destination {
+             port 80
+         }
+         protocol tcp
+         state {
+             new enable
+         }
+     }
+ }
 
-(vm4)
-# cat ifcfg-eth1 | grep GATEWAY
-GATEWAY=10.0.1.9
+・・・
+
+ ethernet eth2 {
+        address 10.0.2.9/24
+        firewall {
+            in {
+                name Outside-In
+            }
+        }
+    }
+ 
 ```
+
+
 
 
 - **その他設定メモ** 
