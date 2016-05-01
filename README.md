@@ -443,12 +443,14 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 |vm1           |192.168.1.2 |192.168.1.0/24|          |            |            |            |
 |vyatta2       |            |            |10.0.1.11   | 10.0.1.0/24| 10.0.2.11  |10.0.2.0/24 |
 |vyatta3       |10.0.1.9    | 10.0.1.0/24|            |            |            |            |
-|vm4           |10.0.1.8    | 10.0.1.0/24|10.0.2.9    |10.0.2.0/24              |            |            |
+|vm4           |10.0.1.8    | 10.0.1.0/24|10.0.2.9    |10.0.2.0/24              |            |            
 
-- vyatta2とvyatta3はOSPF
-- [vyatta3(FWの設定)]
+- vyatta2とvyatta3はOSPF/vyatta1からvyatta4へ通信させる
 
--> vyatta1からvyatta4へport80番接続(httpd)とICMP通信を許可する
+**[vyatta3(FWの設定)]**
+- port80番接続(httpd)とICMP通信を許可する
+- sourceを絞る
+
 ```
 # sh firewall
  name Outside-In {
@@ -473,6 +475,9 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
       rule 25 {
          action accept
          protocol icmp
+         source {
+             address 192.168.1.2
+         }
      }
  }
 
