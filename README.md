@@ -62,6 +62,7 @@ traceroute to 192.168.200.222 (192.168.200.222), 30 hops max, 60 byte packets
 ```
 
 #### **[OSPF]**
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/ospf-icon2.png)
 
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vyatta-network-v1.png)
 
