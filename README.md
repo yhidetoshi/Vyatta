@@ -445,7 +445,7 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
 |vyatta3       |10.0.1.9    | 10.0.1.0/24|10.0.2.9    |10.0.2.0/24 |            |            |
 |vm4           |10.0.1.8    | 10.0.1.0/24|            |            |            |            |
 
-- vyatta2とvyatta3はOSPF/vyatta1からvyatta4へ通信させる
+- vyatta2とvyatta3はOSPF/vm1からvm4へ通信させる
 
 **[vyatta3(FWの設定)]**
 - port80番接続(httpd)とICMP通信を許可する
