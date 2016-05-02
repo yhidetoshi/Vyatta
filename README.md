@@ -481,7 +481,6 @@ PING 10.0.1.8 (10.0.1.8) 56(84) bytes of data.
          }
      }
  }
-
 ```
 
 ```
@@ -494,7 +493,6 @@ $ sh conf
             }
         }
     }
- 
 ```
 
 #### Vyattaの初期設定(ssh接続できるまで)
@@ -502,7 +500,6 @@ $ sh conf
 ```
 - ログインパスワードの変更
 # set system login user vyatta authentication plaintext-password <self_password>
-
 
 - sshを有効にする
 # set service ssh
@@ -516,5 +513,11 @@ $ sh conf
 
 - DNSサーバを指定
 # set system name-server <ip_address>
+
+- タイムゾーンの設定
+# set system time-zone Asia/Tokyo
+
+- ssh公開鍵認証にする
+# loadkey vyos <file_url>/id_rsa.pub
 ```
 
