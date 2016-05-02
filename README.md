@@ -175,6 +175,7 @@ traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
 ※4台のVyattaのconfig:https://github.com/yhidetoshi/Vyatta/tree/master/OSPF-conf
 
 ### VLAN
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vlan-icon.png)
 #### タグVLAN
 
 - **[vyatta2]<===>[vyatta4]**
