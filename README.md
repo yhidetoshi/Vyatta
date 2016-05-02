@@ -498,6 +498,7 @@ $ sh conf
 ```
 
 #### Vyattaの初期設定(ssh接続できるまで)
+※さくらvps上にvyattaを構築した時のメモ
 ```
 - ログインパスワードの変更
 # set system login user vyatta authentication plaintext-password <self_password>
@@ -517,13 +518,3 @@ $ sh conf
 # set system name-server <ip_address>
 ```
 
-- **その他設定メモ** 
- タイムゾーンの変更
-```
-$ show configuration
-$ configure
-# set system time-zone Asia/Tokyo
-# show system time-zone
-time-zone Asia/Tokyo
-[edit]
-```
