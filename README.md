@@ -497,8 +497,25 @@ $ sh conf
  
 ```
 
+#### Vyattaの初期設定(ssh接続できるまで)
+```
+- ログインパスワードの変更
+# set system login user vyatta authentication plaintext-password <self_password>
 
 
+- sshを有効にする
+# set service ssh
+# set service ssh port 22
+
+- インターフェースにipアドレスを付与する
+# set interfaces ethernet eth0 address <ip_address>/24
+
+- デフォルトゲートウェイを設定
+# set system gateway-address <ip_address>
+
+- DNSサーバを指定
+# set system name-server <ip_address>
+```
 
 - **その他設定メモ** 
  タイムゾーンの変更
