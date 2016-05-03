@@ -10,7 +10,8 @@ Vyattaコマンドメモ　
 |コマンド    |説明         |
 |:-----------|:------------|
 |$ configure|コンフィグモードへ移行|
-|# exit|オペレーションモードへ以降|
+|# exit|オペレーションモードへ移行|
+|# exit discard|オペレーションモードへ強制移行|
 |# commit|設定適用|
 |# save|設定保存|
 |$ reboot|再起動|
@@ -24,6 +25,7 @@ Vyattaコマンドメモ　
 |$ show vrrp|vrrpの状態確認|
 |$ show firewall|firewallの設定確認|
 |# show firewall|firewallの設定確認|
+
 
 #### **[スタティックルート]**
 -> Vagrantで4台のVyattaを構築
