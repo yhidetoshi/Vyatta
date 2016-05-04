@@ -176,7 +176,7 @@ traceroute to 10.0.1.2 (10.0.1.2), 30 hops max, 60 byte packets
 ```
 ※4台のVyattaのconfig:https://github.com/yhidetoshi/Vyatta/tree/master/OSPF-conf
 
-### VLAN
+### [VLAN]
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/vlan-icon.png)
 #### タグVLAN
 
@@ -497,7 +497,7 @@ $ sh conf
     }
 ```
 
-#### Vyattaの初期設定(ssh接続できるまで)
+#### [Vyattaの初期設定(ssh接続できるまで)]
 ※さくらvps上にvyattaを構築した時のメモ
 ```
 - ログインパスワードの変更
@@ -523,4 +523,4 @@ $ sh conf
 # loadkey vyos <file_url>/id_rsa.pub
 ```
 
-#### IPsec
+#### [IPsec]
