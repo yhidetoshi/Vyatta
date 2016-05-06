@@ -525,3 +525,108 @@ $ sh conf
 
 #### [IPsec]
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Vyatta/ipsec-icon.jpg)
+
+（未完成）
+
+- 試行方法1
+```
+[vyatta2]
+set vpn ipsec ipsec-interfaces interface eth3
+set vpn ipsec ike-group ike lifetime 3600
+set vpn ipsec ike-group ike proposal 1 encryption aes128
+set vpn ipsec ike-group ike proposal 1 hash sha1
+set vpn ipsec esp-group esp lifetime 1800
+set vpn ipsec esp-group esp proposal 1 encryption aes128
+set vpn ipsec esp-group esp proposal 1 hash sha1
+set vpn ipsec site-to-site peer 10.0.2.9 authentication mode pre-shared-secret
+set vpn ipsec site-to-site peer 10.0.2.9 authentication pre-shared-secret 'presharedkey'
+set vpn ipsec site-to-site peer 10.0.2.9 authentication id @vyatta1
+set vpn ipsec site-to-site peer 10.0.2.9 authentication remote-id @vyatta2
+set interfaces vti vti0
+set vpn ipsec site-to-site peer 10.0.2.9 vti bind vti0
+set vpn ipsec site-to-site peer 10.0.2.9 ike-group ike
+set vpn ipsec site-to-site peer 10.0.2.9 vti esp-group esp
+set vpn ipsec site-to-site peer 10.0.2.9 local-address 192.168.1.11
+set protocols static interface-route 10.0.2.0/24 next-hop-interface vti0
+
+(set protocols static interface-route 10.0.1.0/24 next-hop-interface vti0)
+
+
+
+[vyatta3]
+set vpn ipsec ipsec-interfaces interface eth2
+set vpn ipsec ike-group ike lifetime 3600
+set vpn ipsec ike-group ike proposal 1 encryption aes128
+set vpn ipsec ike-group ike proposal 1 hash sha1
+set vpn ipsec esp-group esp lifetime 1800
+set vpn ipsec esp-group esp proposal 1 encryption aes128
+set vpn ipsec esp-group esp proposal 1 hash sha1
+set vpn ipsec site-to-site peer 10.0.2.11 authentication mode pre-shared-secret
+set vpn ipsec site-to-site peer 10.0.2.11 authentication pre-shared-secret 'presharedkey'
+set vpn ipsec site-to-site peer 10.0.2.11 authentication id @vyatta2
+set vpn ipsec site-to-site peer 10.0.2.11 authentication remote-id @vyatta1
+set interfaces vti vti0
+set vpn ipsec site-to-site peer 10.0.2.11 vti bind vti0
+set vpn ipsec site-to-site peer 10.0.2.11 ike-group ike
+set vpn ipsec site-to-site peer 10.0.2.11 vti esp-group esp
+set vpn ipsec site-to-site peer 10.0.2.11 local-address 10.0.1.9
+
+# set protocols static interface-route 192.168.1.0/24 next-hop-interface vti0
+
+```
+
+- 試行方法2
+```
+[vyatta2]
+# set vpn ipsec ipsec-interfaces interface eth2
+# set vpn ipsec ike-group IKE-1-EAST
+# set vpn ipsec ike-group IKE-1-EAST proposal 1 encryption aes256 
+# set vpn ipsec ike-group IKE-1-EAST proposal 1 hash sha1
+
+# set vpn ipsec ike-group IKE-1-EAST proposal 2 encryption aes128 
+# set vpn ipsec ike-group IKE-1-EAST proposal 2 hash sha1
+# set vpn ipsec ike-group IKE-1-EAST lifetime 3600
+# set vpn ipsec esp-group ESP-1-EAST
+# set vpn ipsec esp-group ESP-1-EAST proposal 1 encryption aes256
+# set vpn ipsec esp-group ESP-1-EAST proposal 1 hash sha1
+# set vpn ipsec esp-group ESP-1-EAST proposal 2 encryption aes128
+# set vpn ipsec esp-group ESP-1-EAST proposal 2 hash sha1
+# set vpn ipsec esp-group ESP-1-EAST lifetime 3600
+# set vpn ipsec site-to-site peer 10.0.2.9
+# set vpn ipsec site-to-site peer 10.0.2.9 authentication mode pre-shared-secret 
+# set vpn ipsec site-to-site peer 10.0.2.9 authentication pre-shared-secret 'presharedkey'
+
+# set vpn ipsec site-to-site peer 10.0.2.9 default-esp-group ESP-1-EAST
+# set vpn ipsec site-to-site peer 10.0.2.9 ike-group IKE-1-EAST
+# set vpn ipsec site-to-site peer 10.0.2.9 local-address 192.168.1.11
+
+# set vpn ipsec site-to-site peer 10.0.2.9 tunnel 1 local prefix 192.168.1.0/24
+# set vpn ipsec site-to-site peer 10.0.2.9 tunnel 1 remote prefix 10.0.1.0/24
+
+
+[vyatta3]
+# set vpn ipsec ipsec-interfaces interface eth2
+# set vpn ipsec ike-group IKE-1-WEST
+# set vpn ipsec ike-group IKE-1-WEST proposal 1 encryption aes256 
+# set vpn ipsec ike-group IKE-1-WEST proposal 1 hash sha1
+
+# set vpn ipsec ike-group IKE-1-WEST proposal 2 encryption aes128 
+# set vpn ipsec ike-group IKE-1-WEST proposal 2 hash sha1
+# set vpn ipsec ike-group IKE-1-WEST lifetime 3600
+# set vpn ipsec esp-group ESP-1-WEST
+# set vpn ipsec esp-group ESP-1-WEST proposal 1 encryption aes256
+# set vpn ipsec esp-group ESP-1-WEST proposal 1 hash sha1
+# set vpn ipsec esp-group ESP-1-WEST proposal 2 encryption aes128
+# set vpn ipsec esp-group ESP-1-WEST proposal 2 hash sha1
+# set vpn ipsec esp-group ESP-1-WEST lifetime 3600
+# set vpn ipsec site-to-site peer 10.0.2.11
+# set vpn ipsec site-to-site peer 10.0.2.11 authentication mode pre-shared-secret 
+# set vpn ipsec site-to-site peer 10.0.2.11 authentication pre-shared-secret 'presharedkey'
+
+# set vpn ipsec site-to-site peer 10.0.2.11 default-esp-group ESP-1-WEST
+# set vpn ipsec site-to-site peer 10.0.2.11 ike-group IKE-1-WEST
+# set vpn ipsec site-to-site peer 10.0.2.11 local-address 10.0.1.9
+
+# set vpn ipsec site-to-site peer 10.0.2.11 tunnel 1 local prefix 10.10.1.9/24
+# set vpn ipsec site-to-site peer 10.0.2.11 tunnel 1 remote prefix 192.168.1.0/24
+```
