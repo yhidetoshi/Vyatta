@@ -578,7 +578,7 @@ set vpn ipsec site-to-site peer 10.0.2.11 local-address 10.0.1.9
 - 試行方法2
 ```
 [vyatta2]
-# set vpn ipsec ipsec-interfaces interface eth2
+# set vpn ipsec ipsec-interfaces interface eth3
 # set vpn ipsec ike-group IKE-1-EAST
 # set vpn ipsec ike-group IKE-1-EAST proposal 1 encryption aes256 
 # set vpn ipsec ike-group IKE-1-EAST proposal 1 hash sha1
